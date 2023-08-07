@@ -1,8 +1,8 @@
-import HomeComponent from '@components/home.jsx'
+import HomeComponent from '@components/Home/home.jsx'
 export default function Home() {
   return (
-   <main>
-    <HomeComponent />
-   </main>
+    <main className='w-[90%] mx-auto'>
+      <HomeComponent />
+    </main>
   )
 }
