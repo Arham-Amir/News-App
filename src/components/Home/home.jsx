@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import ShowHeadNews from '@components/Home/showHeadNews'
 import ShowNews from '@components/Home/showNews'
-import { fetchNews } from '@redux/newsStore'
+import { fetchNewsForHome } from '@redux/newsStore'
 import { useDispatch, useSelector } from 'react-redux';
 import Pagination from '@components/Base/pagination'
 
@@ -10,7 +10,7 @@ const HomeComponent = () => {
   const { loading, news} = useSelector(state => state.newsStore)
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(fetchNews())
+    dispatch(fetchNewsForHome())
   }, [])
   return (
     <section>
@@ -22,6 +22,7 @@ const HomeComponent = () => {
                 return (
                   <ShowHeadNews key={i} news={el}
                     className='col-span-3 h-[350px] flex flex-row gap-5 w-[90%] mx-auto'
+                    newsUrl = {el.url}
                     img={el.urlToImage}
                     title={el.title}
                     description={el.description}
@@ -32,6 +33,7 @@ const HomeComponent = () => {
                 return (
                   <ShowNews key={i} news={el}
                     className='h-[350px] flex flex-col'
+                    newsUrl = {el.url}
                     img={el.urlToImage}
                     imgHeight={'h-1/2'}
                     title={el.title}
