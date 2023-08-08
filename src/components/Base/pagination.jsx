@@ -7,6 +7,10 @@ const Pagination = () => {
   const { currentPage, totalPages } = useSelector(state => state.newsStore)
   const dispatch = useDispatch()
 
+  function handlePgButton(func) {
+    dispatch(func())
+    dispatch(newsActions.UpdateListOnPageChange())
+  }
   return (
     <section className="flex-all-center gap-3 mb-10 text-lg font-semibold">
       <button className={`${currentPage == 0 && "text-gray-700"}`} onClick={() => handlePgButton(newsActions.firstPage)}><BiFirstPage size={30} /></button>
@@ -23,8 +27,8 @@ const Pagination = () => {
       </>
       }
 
-      <button className={`${currentPage == totalPages - 1 && "text-gray-700"}`} onClick={() => handlePgButton(newsActions.nextPage)}><FaGreaterThan /></button>
-      <button className={`${currentPage == totalPages - 1 && "text-gray-700"}`} onClick={() => handlePgButton(newsActions.lastPage)}><BiLastPage size={30} /></button>
+      <button className={`${currentPage == totalPages-1 && "text-gray-700"}`} onClick={() => handlePgButton(newsActions.nextPage)}><FaGreaterThan /></button>
+      <button className={`${currentPage == totalPages-1 && "text-gray-700"}`} onClick={() => handlePgButton(newsActions.lastPage)}><BiLastPage size={30} /></button>
     </section>
   );
 }
