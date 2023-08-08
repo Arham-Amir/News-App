@@ -10,8 +10,8 @@ async function getResponse() {
     const resp = await axios(url)
     return resp.data.articles
   } catch (e) {
-      console.log(e.message)
-      return null
+    console.log(e.message)
+    return null
   }
 }
 
@@ -19,28 +19,40 @@ export const fetchNews = createAsyncThunk(
   'fetchNewsAsyncFunc',
   async () => {
     const resp = await getResponse()
-    console.log(resp)
+    console.log(resp.length)
     return resp
   })
+export const fetchAndUpdateList = (state) => {
+  state.news = state.totalNews?.slice((state.currentPage * state.newsPerPage), (state.currentPage * state.newsPerPage + state.newsPerPage));
+  console.log(state.news)
+}
 
 const newsSlice = createSlice({
   name: 'NewsAppSlice',
   initialState: {
     loading: false,
 
-    currentPage: 1,
-    totalPage: 0,
-    newsPerPage : 10,
-    news: null
+    currentPage: 0,
+    totalPages: 0,
+    newsPerPage: 10,
+    news: null,
+    totalNews : null,
   },
   reducers: {
+    nextPage: (state, action) => {
+      state.currentPage = action.payload.pageNumber - 1
+    },
+    UpdateListOnPageChange: (state) => {
+      fetchAndUpdateList(state);
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(fetchNews.pending, (state) => {
       state.loading = true;
     }).addCase(fetchNews.fulfilled, (state, action) => {
-      state.news = action.payload?.slice((state.currentPage*state.newsPerPage), (state.currentPage*state.newsPerPage + 10));
-      console.log(state.news)
+      state.totalNews = action.payload;
+      state.totalPages = Math.ceil(action.payload.length / state.newsPerPage)
+      fetchAndUpdateList(state);
       state.loading = false;
     })
   }
