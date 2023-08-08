@@ -19,7 +19,6 @@ export const fetchNews = createAsyncThunk(
   'fetchNewsAsyncFunc',
   async () => {
     const resp = await getResponse()
-    console.log(resp.length)
     return resp
   })
 export const fetchAndUpdateList = (state) => {
@@ -32,15 +31,24 @@ const newsSlice = createSlice({
   initialState: {
     loading: false,
 
-    currentPage: 0,
+    currentPage: 2,
     totalPages: 0,
     newsPerPage: 10,
     news: null,
-    totalNews : null,
+    totalNews: null,
   },
   reducers: {
-    nextPage: (state, action) => {
-      state.currentPage = action.payload.pageNumber - 1
+    nextPage: (state) => {
+      state.currentPage != state.totalPages - 1 && (state.currentPage = state.currentPage + 1);
+    },
+    previousPage: (state) => {
+      state.currentPage != 0 && (state.currentPage = state.currentPage - 1);
+    },
+    firstPage: (state) => {
+      state.currentPage = 0;
+    },
+    lastPage: (state) => {
+      state.currentPage = state.totalPages - 1;
     },
     UpdateListOnPageChange: (state) => {
       fetchAndUpdateList(state);

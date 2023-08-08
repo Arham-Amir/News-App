@@ -7,3 +7,10 @@
     @apply bg-zinc-200;
   }
 }
+@layer utilities{
+  .flex-all-center{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
