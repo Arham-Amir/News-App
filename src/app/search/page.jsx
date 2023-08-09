@@ -7,9 +7,13 @@ import { useDispatch, useSelector } from 'react-redux';
 const Search = () => {
   const { loading } = useSelector(state => state.newsStore)
   const dispatch = useDispatch()
-  dispatch(newsActions.setLoader())
-  // useEffect(() => {
-  // }, [])
+  useEffect(() => {
+    dispatch(newsActions.setLoader())
+    return () => {
+      dispatch(newsActions.resetCurrentPageNumber())
+    };
+  }, [])
+
   return (
     <section>
       <SearchBar></SearchBar>
