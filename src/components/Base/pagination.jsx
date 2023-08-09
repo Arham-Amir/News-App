@@ -17,8 +17,12 @@ const Pagination = () => {
       <button className={`${currentPage == 0 && "text-gray-700"}`} onClick={() => handlePgButton(newsActions.previousPage)}><FaLessThan /></button>
       <p className={`${currentPage == 0 && "text-blue-700"}`}>{'1'}</p>
       {currentPage != 0 && <>
-        <p>{'...'}</p>
+        {currentPage - 1 > 0 && <>
+          <p>{'...'}</p>
+          <p>{currentPage}</p></>}
         <p className="text-blue-700">{currentPage + 1}</p>
+        {currentPage + 1 < totalPages - 1 && <>
+          <p>{currentPage + 2}</p></>}
       </>
       }
       {currentPage != totalPages - 1 && <>
@@ -27,8 +31,8 @@ const Pagination = () => {
       </>
       }
 
-      <button className={`${currentPage == totalPages-1 && "text-gray-700"}`} onClick={() => handlePgButton(newsActions.nextPage)}><FaGreaterThan /></button>
-      <button className={`${currentPage == totalPages-1 && "text-gray-700"}`} onClick={() => handlePgButton(newsActions.lastPage)}><BiLastPage size={30} /></button>
+      <button className={`${currentPage == totalPages - 1 && "text-gray-700"}`} onClick={() => handlePgButton(newsActions.nextPage)}><FaGreaterThan /></button>
+      <button className={`${currentPage == totalPages - 1 && "text-gray-700"}`} onClick={() => handlePgButton(newsActions.lastPage)}><BiLastPage size={30} /></button>
     </section>
   );
 }

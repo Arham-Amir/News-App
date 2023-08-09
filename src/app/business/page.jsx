@@ -8,6 +8,7 @@ export default function Home() {
   const { loading } = useSelector(state => state.newsStore)
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(newsActions.setLoader())
     dispatch(searchBusinessNews())
     return () => {
       dispatch(newsActions.resetCurrentPageNumber())
@@ -15,11 +16,7 @@ export default function Home() {
   }, [])
   return (
     <main className='w-[90%] mx-auto'>
-      {loading ? <p>Loading...</p>
-        : <>
-          <HomeComponent />
-        </>
-      }
+      <HomeComponent />
     </main>
   )
 }
