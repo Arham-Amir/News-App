@@ -19,10 +19,12 @@ const Search = () => {
       <SearchBar></SearchBar>
       {loading ?
         <section>
-          <h1 className='min-h-full flex-all-center text-2xl font-bold'>Search For Input</h1>
+          <h1 className='mt-4 min-h-full flex-all-center text-2xl font-bold'>Search For Input</h1>
         </section>
         :
-        (<HomeComponent />)
+        (<main className='w-[90%] mx-auto'>
+          <HomeComponent />
+        </main>)
       }
     </section>
   );

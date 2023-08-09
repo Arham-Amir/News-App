@@ -30,7 +30,7 @@ export const fetchNewsForHome = createAsyncThunk(
 export const searchNews = createAsyncThunk(
   'searchNewsAsyncFunc',
   async ({ search }) => {
-    const url = `https://newsapi.org/v2/everything?q=${search}&`;
+    const url = `https://newsapi.org/v2/everything?q=${search}&from=2023-07-09&`;
     const resp = await getApiResponse(url)
     return resp
   })
