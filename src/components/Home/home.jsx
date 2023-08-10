@@ -20,11 +20,11 @@ const HomeComponent = () => {
               if (i == 0) {
                 return (
                 <>
-                <ShowHeadNewsSkeleton className='col-span-3 h-[350px] flex flex-row gap-5 w-[90%] mx-auto'/>
+                <ShowHeadNewsSkeleton key={i} className='col-span-3 h-[350px] flex flex-row gap-5 w-[90%] mx-auto'/>
                 </>)
               }
               else {
-                return (<ShowNewsSkeleton className='h-[350px] flex flex-col'/>)
+                return (<ShowNewsSkeleton key={i} className='h-[350px] flex flex-col'/>)
               }
             })}
           </>

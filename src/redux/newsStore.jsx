@@ -22,15 +22,24 @@ async function getApiResponse(apiUrl) {
 export const fetchNewsForHome = createAsyncThunk(
   'fetchNewsAsyncFunc',
   async () => {
-    // https://newsapi.org/v2/everything?q=Apple&from=2023-08-09&sortBy=popularity
     const url = 'https://newsapi.org/v2/top-headlines?sources=bbc-news&'
     const resp = await getApiResponse(url)
     return resp
   })
 export const searchNews = createAsyncThunk(
   'searchNewsAsyncFunc',
-  async ({ search }) => {
-    const url = `https://newsapi.org/v2/everything?q=${search}&from=2023-07-09&`;
+  async ({ search, date, sort, current }) => {
+    let url = '';
+    if (date && sort) {
+      url = `https://newsapi.org/v2/everything?q=${search}&from=${current}&to=${date}&sortBy=${sort}&`;
+    } else if (date) {
+      url = `https://newsapi.org/v2/everything?q=${search}&from=${current}&to=${date}&`;
+    } else if (sort) {
+      url = `https://newsapi.org/v2/everything?q=${search}&sortBy=${sort}&`;
+    } else if (search) {
+      url = `https://newsapi.org/v2/everything?q=${search}&`;
+    }
+    else { return 0 }
     const resp = await getApiResponse(url)
     return resp
   })
@@ -103,9 +112,11 @@ const newsSlice = createSlice({
     builder.addCase(searchNews.pending, (state) => {
       state.loading = true;
     }).addCase(searchNews.fulfilled, (state, action) => {
-      state.totalNews = action.payload;
-      state.totalPages = Math.ceil(action.payload.length / state.newsPerPage)
-      fetchAndUpdateList(state);
+      if (action.payload) {
+        state.totalNews = action.payload;
+        state.totalPages = Math.ceil(action.payload.length / state.newsPerPage)
+        fetchAndUpdateList(state);
+      }
       state.loading = false;
     })
     builder.addCase(searchTechnologyNews.pending, (state) => {
