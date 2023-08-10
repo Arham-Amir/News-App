@@ -1,19 +1,17 @@
-import Skeleton from '@mui/material/Skeleton';
-
 
 const ShowNews = (props = {}) => {
   return (
     <section className={`${props.className}`}>
       <section className="basis-1/2 overflow-hidden">
-        <Skeleton height={175} variant="rectangular" className={`w-full object-cover`}/>
+        <p className={`w-full h-full bg-gray-300`}/>
         </section>
       <section className={`basis-1/2 p-2 text-justify`}>
-        <Skeleton className={`w-[90%] text-gray-600 `} />
-        <Skeleton className={`w-[90%] text-black my-1`} />
-        <Skeleton width="80%" className={`w-[90%] text-black my-1`} />
-        <Skeleton className={`w-[90%] text-gray-600 text-sm`} />
-        <Skeleton className={`w-[90%] text-gray-600 text-sm`} />
-        <Skeleton width="80%" className={`w-[90%] text-gray-600 text-sm`} />
+        <p className={`w-[40%] p-2 bg-gray-300 `} />
+        <p className={`w-[90%] p-3 bg-gray-300 mt-2 mb-1`} />
+        <p className={`w-[60%] p-3 bg-gray-300 mb-2`} />
+        <p className={`w-[90%] p-2 bg-gray-300`} />
+        <p className={`w-[90%] p-2 bg-gray-300 my-1`} />
+        <p className={`w-[60%] p-2 bg-gray-300`} />
       </section>
     </section>
   );

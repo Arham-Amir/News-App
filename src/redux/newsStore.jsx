@@ -59,7 +59,7 @@ export const searchSportsNews = createAsyncThunk(
 const newsSlice = createSlice({
   name: 'NewsAppSlice',
   initialState: {
-    loading: false,
+    loading: true,
 
     currentPage: 0,
     totalPages: 0,
