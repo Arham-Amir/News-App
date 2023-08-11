@@ -19,7 +19,7 @@ const Search = () => {
       <SearchBar></SearchBar>
       {loading ?
         <section>
-          <h1 className='absolute top-1/2 left-1/2 -translate-x-1/2 text-2xl font-bold'>Search For Input</h1>
+          <h1 className='absolute top-1/2 left-16 text-2xl font-bold border-2 border-black p-3'>Search For Input</h1>
         </section>
         :
         (<main className='w-[90%] mx-auto'>

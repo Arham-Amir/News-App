@@ -32,7 +32,10 @@ export const searchNews = createAsyncThunk(
     let url = '';
     if (date && sort) {
       url = `https://newsapi.org/v2/everything?q=${search}&from=${current}&to=${date}&sortBy=${sort}&`;
-    } else if (date) {
+    } else if (date == current) {
+      url = `https://newsapi.org/v2/everything?q=${search}&to=${date}&`;
+    }
+    else if (date) {
       url = `https://newsapi.org/v2/everything?q=${search}&from=${current}&to=${date}&`;
     } else if (sort) {
       url = `https://newsapi.org/v2/everything?q=${search}&sortBy=${sort}&`;
